@@ -15,7 +15,6 @@ public class Main
         a.goToBooks();
         Books b = new Books(driver);
         b.displayBooks();
-        //b.displayBook(0);
         b.findBook();
     }
 }
