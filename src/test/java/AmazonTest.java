@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +14,7 @@ public class AmazonTest extends TestCase {
     @Test
     public void testEmAll()
     {
-        var path = Paths.get("Components/chromedriver/chromedriver.exe");
+        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", path.toString());
         WebDriver driver = new ChromeDriver();
         List<Book> books;
@@ -45,7 +46,7 @@ public class AmazonTest extends TestCase {
     @Test
     public void testAmazonBooks()
     {
-        var path = Paths.get("Components/chromedriver/chromedriver.exe");
+        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", path.toString());
         WebDriver driver = new ChromeDriver();
         Amazon a = new Amazon(driver);
@@ -61,7 +62,7 @@ public class AmazonTest extends TestCase {
     @Test
     public void testAmazonBook()
     {
-        var path = Paths.get("Components/chromedriver/chromedriver.exe");
+        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", path.toString());
         WebDriver driver = new ChromeDriver();
         List<Book> books;
@@ -80,7 +81,7 @@ public class AmazonTest extends TestCase {
     @Test
     public void testHeadFirst()
     {
-        var path = Paths.get("Components/chromedriver/chromedriver.exe");
+        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
         System.setProperty("webdriver.chrome.driver", path.toString());
         WebDriver driver = new ChromeDriver();
         HeadFirst hf = new HeadFirst(driver);
