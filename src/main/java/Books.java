@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import javax.crypto.NullCipher;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,9 +18,20 @@ public class Books {
     Books(WebDriver driver)
     {
         this.driver = driver;
+        createWebBooks();
+        createBooks();
+    }
+
+    private void createWebBooks()
+    {
         webBooks = driver.findElements(By.xpath("//div[@class='s-main-slot s-result-list s-search-results sg-row']" +
                 "/div[@class='s-result-item s-asin sg-col-0-of-12 sg-col-16-of-20 sg-col sg-col-12-of-16']"));
-        createBooks();
+
+        if (webBooks.size() == 0) {
+            webBooks = driver.findElements(By.xpath("//div[@class='s-main-slot s-result-list s-search-results sg-row']" +
+            "/div[@class='s-result-item s-asin sg-col-0-of-12 s-spacing-small sg-col-16-of-20 sg-col sg-col-12-of-16']"));
+            }
+
     }
 
     private void createBooks()

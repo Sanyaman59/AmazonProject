@@ -1,22 +1,32 @@
-import junit.framework.TestCase;
-import org.junit.Test;
+import org.openqa.selenium.Capabilities;
+import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AmazonTest extends TestCase {
+public class AmazonTest{
 
     @Test
     public void testEmAll()
     {
-        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", path.toString());
-        WebDriver driver = new ChromeDriver();
+        DesiredCapabilities dc = DesiredCapabilities.chrome();
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         List<Book> books;
         Book headFirst;
 
@@ -31,7 +41,7 @@ public class AmazonTest extends TestCase {
 
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
-        assertTrue(hf.atPage());
+        Assert.assertTrue(hf.atPage());
         hf.displayBook();
         headFirst = hf.getBook();
         hf.close();
@@ -46,15 +56,17 @@ public class AmazonTest extends TestCase {
     @Test
     public void testAmazonBooks()
     {
-        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", path.toString());
-        WebDriver driver = new ChromeDriver();
+        DesiredCapabilities dc = DesiredCapabilities.chrome();
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         Amazon a = new Amazon(driver);
         a.open();
-        assertTrue(a.atPage());
         a.goToBooks();
         Books b = new Books(driver);
-        assertTrue(b.atPage());
         b.displayBooks();
         b.close();
     }
@@ -62,31 +74,40 @@ public class AmazonTest extends TestCase {
     @Test
     public void testAmazonBook()
     {
-        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", path.toString());
-        WebDriver driver = new ChromeDriver();
+        DesiredCapabilities dc = DesiredCapabilities.chrome();
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         List<Book> books;
         Amazon a = new Amazon(driver);
         a.open();
         a.goToBooks();
         Books b = new Books(driver);
+        System.out.println("The book from the 'Books' class method : ");
+        b.displayBook(2);;
         System.out.println("The book from the 'books' variable : ");
         books = b.getBooks();
         System.out.println(books.get(2).toString());
-        System.out.println("The book from the 'Books' class method : ");
-        b.displayBook(2);
+
         b.close();
     }
 
     @Test
     public void testHeadFirst()
     {
-        Path path = Paths.get("Components/chromedriver/chromedriver.exe");
-        System.setProperty("webdriver.chrome.driver", path.toString());
-        WebDriver driver = new ChromeDriver();
+        DesiredCapabilities dc = DesiredCapabilities.chrome();
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
-        assertTrue(hf.atPage());
+        Assert.assertTrue(hf.atPage());
         hf.displayBook();
         hf.close();
     }

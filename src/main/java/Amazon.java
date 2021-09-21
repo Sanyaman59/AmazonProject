@@ -50,7 +50,7 @@ public class Amazon {
         try {
             book.click();
             Thread.sleep(2000);
-            dropdownElement.selectByVisibleText("Books");
+            dropdownElement.selectByIndex(5);
             driver.findElement(By.xpath("//input[@name='field-keywords']")).sendKeys("Java",Keys.ENTER);
         }
         catch(InterruptedException e)
