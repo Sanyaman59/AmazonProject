@@ -32,9 +32,9 @@ public class HeadFirst {
         }
     }
 
-    public void close()
+    public void quit()
     {
-        driver.close();
+        driver.quit();
     }
 
     public boolean atPage()

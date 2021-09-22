@@ -25,9 +25,9 @@ public class Amazon {
         }
     }
 
-    public void close()
+    public void quit()
     {
-        driver.close();
+        driver.quit();
     }
 
     public boolean atPage()
@@ -44,9 +44,6 @@ public class Amazon {
         WebElement book = driver.findElement(By.id("nav-search-dropdown-card"));
         WebElement select = driver.findElement(By.name("url"));
         Select dropdownElement = new Select(select);
-        //book.click();
-
-        //Actions actions = new Actions(driver);
         try {
             book.click();
             Thread.sleep(2000);

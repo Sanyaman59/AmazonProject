@@ -27,11 +27,13 @@ public class AmazonTest{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        driver.manage().window().maximize();
         List<Book> books;
         Book headFirst;
 
         Amazon a = new Amazon(driver);
         a.open();
+        Assert.assertTrue(a.atPage());
         a.goToBooks();
 
         Books b = new Books(driver);
@@ -44,13 +46,15 @@ public class AmazonTest{
         Assert.assertTrue(hf.atPage());
         hf.displayBook();
         headFirst = hf.getBook();
-        hf.close();
-        if(books.contains(headFirst))
+        if(books.contains(headFirst)) {
+            Assert.assertEquals(headFirst.hashCode(), books.get(books.indexOf(headFirst)).hashCode());
             System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
-            + headFirst.hashCode() +" - "+ books.get(books.indexOf(headFirst)).hashCode());
+                    + headFirst.hashCode() + " : " + books.get(books.indexOf(headFirst)).hashCode());
+        }
         else
             System.out.println("He isn't here, is he?");
         System.out.println(headFirst.equals(books.get(2)));
+        driver.quit();
     }
 
     @Test
@@ -63,12 +67,13 @@ public class AmazonTest{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        driver.manage().window().maximize();
         Amazon a = new Amazon(driver);
         a.open();
         a.goToBooks();
         Books b = new Books(driver);
         b.displayBooks();
-        b.close();
+        driver.quit();
     }
 
     @Test
@@ -81,6 +86,7 @@ public class AmazonTest{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        driver.manage().window().maximize();
         List<Book> books;
         Amazon a = new Amazon(driver);
         a.open();
@@ -91,8 +97,7 @@ public class AmazonTest{
         System.out.println("The book from the 'books' variable : ");
         books = b.getBooks();
         System.out.println(books.get(2).toString());
-
-        b.close();
+        driver.quit();
     }
 
     @Test
@@ -105,10 +110,11 @@ public class AmazonTest{
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+        driver.manage().window().maximize();
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
         Assert.assertTrue(hf.atPage());
         hf.displayBook();
-        hf.close();
+        driver.quit();
     }
 }

@@ -73,7 +73,7 @@ public class Books {
 
     public void close()
     {
-        driver.close();
+        driver.quit();
     }
 
     public void displayBooks()

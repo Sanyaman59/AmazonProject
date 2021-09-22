@@ -31,7 +31,7 @@ public class Main
         hf.open();
         hf.displayBook();
         headFirst = hf.getBook();
-        hf.close();
+        hf.quit();
         if(books.contains(headFirst))
             System.out.println("The book 'Head first...' is in this list. Their hash codes are : "
                     + headFirst.hashCode() +" - "+ books.get(books.indexOf(headFirst)).hashCode());
