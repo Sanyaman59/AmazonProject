@@ -14,6 +14,7 @@ import java.util.List;
 public class HeadFirst {
     private WebDriver driver;
     private Book headFirst;
+    static final String APP_URL = "https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208/ref=sr_1_2?dchild=1&keywords=Java&qid=1610356790&s=books&sr=1-2";
 
     HeadFirst(WebDriver driver)
     {
@@ -23,7 +24,7 @@ public class HeadFirst {
     public void open()
     {
         try {
-            driver.get("https://www.amazon.com/Head-First-Java-Kathy-Sierra/dp/0596009208/ref=sr_1_2?dchild=1&keywords=Java&qid=1610356790&s=books&sr=1-2");
+            driver.get(APP_URL);
             Thread.sleep(1000);
             createBook();
         }

@@ -40,6 +40,8 @@ public class Books {
         {
             String name = webBooks.get(i).findElement(By.xpath(".//span[@class='a-size-medium a-color-base a-text-normal']")).getText();
             String psuedoAuthor = webBooks.get(i).findElement(By.xpath(".//div[@class='a-row']")).getText();
+            System.out.println(psuedoAuthor.indexOf("by"));
+            System.out.println(psuedoAuthor.lastIndexOf('|')-1);
             psuedoAuthor = psuedoAuthor.substring(psuedoAuthor.indexOf("by"),psuedoAuthor.lastIndexOf('|')-1);
             float price = 0;
             if(webBooks.get(i)

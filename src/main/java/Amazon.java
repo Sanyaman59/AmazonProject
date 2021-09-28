@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import java.time.Duration;
 public class Amazon {
     private WebDriver driver;
+    static final String APP_URL = "https://www.amazon.com";
 
     Amazon(WebDriver driver)
     {
@@ -17,8 +18,9 @@ public class Amazon {
     public void open()
     {
         try {
-            driver.get("https://www.amazon.com");
+            driver.get(APP_URL);
             Thread.sleep(1000);
+            System.out.println("Half past ten");
         }
         catch (InterruptedException e) {
             e.printStackTrace();

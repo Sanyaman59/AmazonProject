@@ -3,9 +3,13 @@ import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.net.MalformedURLException;
@@ -14,20 +18,28 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class AmazonTest{
+
+    WebDriver driver;
+    static final String HOST_URL = "http://localhost:4444/wd/hub";
 
     @Test
     public void testEmAll()
     {
-        DesiredCapabilities dc = DesiredCapabilities.chrome();
-        WebDriver driver = null;
+        ChromeOptions options = new ChromeOptions();
+        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+//        if(Platform.getCurrent()==Platform.WIN10)
+//            dc.setPlatform(Platform.WINDOWS);
+//        else
+//            dc.setPlatform(Platform.getCurrent());
         try {
-            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+            driver = new RemoteWebDriver(new URL(HOST_URL), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<Book> books;
         Book headFirst;
 
@@ -54,39 +66,49 @@ public class AmazonTest{
         else
             System.out.println("He isn't here, is he?");
         System.out.println(headFirst.equals(books.get(2)));
-        driver.quit();
     }
+
+
 
     @Test
     public void testAmazonBooks()
     {
-        DesiredCapabilities dc = DesiredCapabilities.chrome();
-        WebDriver driver = null;
+        ChromeOptions options = new ChromeOptions();
+        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+//        if(Platform.getCurrent()==Platform.WIN10)
+//            dc.setPlatform(Platform.WINDOWS);
+//        else
+//            dc.setPlatform(Platform.getCurrent());
         try {
-            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+            driver = new RemoteWebDriver(new URL(HOST_URL), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         Amazon a = new Amazon(driver);
         a.open();
         a.goToBooks();
         Books b = new Books(driver);
         b.displayBooks();
-        driver.quit();
     }
+
+
 
     @Test
     public void testAmazonBook()
     {
-        DesiredCapabilities dc = DesiredCapabilities.chrome();
-        WebDriver driver = null;
+        ChromeOptions options = new ChromeOptions();
+        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+//        if(Platform.getCurrent()==Platform.WIN10)
+//            dc.setPlatform(Platform.WINDOWS);
+//        else
+//            dc.setPlatform(Platform.getCurrent());
         try {
-            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+            driver = new RemoteWebDriver(new URL(HOST_URL), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<Book> books;
         Amazon a = new Amazon(driver);
         a.open();
@@ -103,18 +125,30 @@ public class AmazonTest{
     @Test
     public void testHeadFirst()
     {
-        DesiredCapabilities dc = DesiredCapabilities.chrome();
-        WebDriver driver = null;
+        ChromeOptions options = new ChromeOptions();
+        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+//        if(Platform.getCurrent()==Platform.WIN10)
+//            dc.setPlatform(Platform.WINDOWS);
+////        else
+////            dc.setPlatform(Platform.getCurrent());
         try {
-            driver = new RemoteWebDriver(new URL("http://192.168.0.108:4444/wd/hub"), dc);
+            driver = new RemoteWebDriver(new URL(HOST_URL), options);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
         Assert.assertTrue(hf.atPage());
         hf.displayBook();
-        driver.quit();
+    }
+
+    @AfterMethod
+    public void tearDown()
+    {
+        if(driver != null)
+        {
+            driver.quit();
+        }
     }
 }
