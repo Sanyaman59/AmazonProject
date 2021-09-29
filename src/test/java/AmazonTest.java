@@ -9,6 +9,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -20,38 +21,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class AmazonTest{
+public class AmazonTest extends Base{
 
-    WebDriver driver;
+    //WebDriver driver = getDriver();
     static final String HOST_URL = "http://localhost:4444/wd/hub";
 
     @Test
     public void testEmAll()
     {
-        ChromeOptions options = new ChromeOptions();
-        //DesiredCapabilities dc = DesiredCapabilities.chrome();
-//        if(Platform.getCurrent()==Platform.WIN10)
-//            dc.setPlatform(Platform.WINDOWS);
-//        else
-//            dc.setPlatform(Platform.getCurrent());
-        try {
-            driver = new RemoteWebDriver(new URL(HOST_URL), options);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriver driver = getDriver();
+//        ChromeOptions options = new ChromeOptions();
+//        //DesiredCapabilities dc = DesiredCapabilities.chrome();
+////        if(Platform.getCurrent()==Platform.WIN10)
+////            dc.setPlatform(Platform.WINDOWS);
+////        else
+////            dc.setPlatform(Platform.getCurrent());
+//        try {
+//            driver = new RemoteWebDriver(new URL(HOST_URL), options);
+//        } catch (MalformedURLException e) {
+//            e.printStackTrace();
+//        }
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         List<Book> books;
         Book headFirst;
 
         Amazon a = new Amazon(driver);
         a.open();
-        Assert.assertTrue(a.atPage());
+//        Assert.assertTrue(a.atPage());
         a.goToBooks();
 
         Books b = new Books(driver);
         books = b.getBooks();
         System.out.println("The book from the 'Books' class method : ");
-        b.displayBook(2);
+        b.displayBooks();
 
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
@@ -73,18 +75,7 @@ public class AmazonTest{
     @Test
     public void testAmazonBooks()
     {
-        ChromeOptions options = new ChromeOptions();
-        //DesiredCapabilities dc = DesiredCapabilities.chrome();
-//        if(Platform.getCurrent()==Platform.WIN10)
-//            dc.setPlatform(Platform.WINDOWS);
-//        else
-//            dc.setPlatform(Platform.getCurrent());
-        try {
-            driver = new RemoteWebDriver(new URL(HOST_URL), options);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriver driver = getDriver();
         Amazon a = new Amazon(driver);
         a.open();
         a.goToBooks();
@@ -97,18 +88,7 @@ public class AmazonTest{
     @Test
     public void testAmazonBook()
     {
-        ChromeOptions options = new ChromeOptions();
-        //DesiredCapabilities dc = DesiredCapabilities.chrome();
-//        if(Platform.getCurrent()==Platform.WIN10)
-//            dc.setPlatform(Platform.WINDOWS);
-//        else
-//            dc.setPlatform(Platform.getCurrent());
-        try {
-            driver = new RemoteWebDriver(new URL(HOST_URL), options);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        WebDriver driver = getDriver();
         List<Book> books;
         Amazon a = new Amazon(driver);
         a.open();
@@ -125,30 +105,20 @@ public class AmazonTest{
     @Test
     public void testHeadFirst()
     {
+        WebDriver driver = getDriver();
         ChromeOptions options = new ChromeOptions();
-        //DesiredCapabilities dc = DesiredCapabilities.chrome();
-//        if(Platform.getCurrent()==Platform.WIN10)
-//            dc.setPlatform(Platform.WINDOWS);
-////        else
-////            dc.setPlatform(Platform.getCurrent());
-        try {
-            driver = new RemoteWebDriver(new URL(HOST_URL), options);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         HeadFirst hf = new HeadFirst(driver);
         hf.open();
         Assert.assertTrue(hf.atPage());
         hf.displayBook();
     }
 
-    @AfterMethod
-    public void tearDown()
-    {
-        if(driver != null)
-        {
-            driver.quit();
-        }
-    }
+//    @AfterMethod
+//    public void tearDown()
+//    {
+//        if(driver != null)
+//        {
+//            driver.quit();
+//        }
+//    }
 }

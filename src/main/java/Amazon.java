@@ -14,13 +14,13 @@ public class Amazon {
     {
         this.driver = driver;
     }
-
+    Base base = new Base();
     public void open()
     {
         try {
-            driver.get(APP_URL);
+            //base.getDriver().navigate().to(APP_URL);
+            driver.navigate().to(APP_URL);
             Thread.sleep(1000);
-            System.out.println("Half past ten");
         }
         catch (InterruptedException e) {
             e.printStackTrace();

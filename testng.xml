@@ -2,8 +2,16 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="methods" thread-count="4">
     <test thread-count="4" name="Test">
+        <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="AmazonTest"/>
+            <class name="AmazonTest">
+                <methods>
+                    <include name="testEmAll" />
+                    <include name="testAmazonBooks" />
+                    <include name="testAmazonBook" />
+                    <include name="testHeadFirst" />
+                </methods>
+            </class>
         </classes>
     </test> <!-- Test -->
 </suite> <!-- Suite -->

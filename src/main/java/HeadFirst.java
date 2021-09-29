@@ -24,7 +24,7 @@ public class HeadFirst {
     public void open()
     {
         try {
-            driver.get(APP_URL);
+            driver.navigate().to(APP_URL);
             Thread.sleep(1000);
             createBook();
         }
