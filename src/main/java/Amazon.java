@@ -8,16 +8,18 @@ import org.openqa.selenium.support.ui.Select;
 import java.time.Duration;
 public class Amazon {
     private WebDriver driver;
+    static final String APP_URL = "https://www.amazon.com";
 
     Amazon(WebDriver driver)
     {
         this.driver = driver;
     }
-
+    Base base = new Base();
     public void open()
     {
         try {
-            driver.get("https://www.amazon.com");
+            //base.getDriver().navigate().to(APP_URL);
+            driver.navigate().to(APP_URL);
             Thread.sleep(1000);
         }
         catch (InterruptedException e) {

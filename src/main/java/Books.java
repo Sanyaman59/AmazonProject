@@ -40,7 +40,12 @@ public class Books {
         {
             String name = webBooks.get(i).findElement(By.xpath(".//span[@class='a-size-medium a-color-base a-text-normal']")).getText();
             String psuedoAuthor = webBooks.get(i).findElement(By.xpath(".//div[@class='a-row']")).getText();
-            psuedoAuthor = psuedoAuthor.substring(psuedoAuthor.indexOf("by"),psuedoAuthor.lastIndexOf('|')-1);
+            try {
+                psuedoAuthor = psuedoAuthor.substring(psuedoAuthor.indexOf("by"), psuedoAuthor.lastIndexOf('|') - 1);
+            }
+            catch(StringIndexOutOfBoundsException e) {
+                System.out.println(psuedoAuthor);
+            }
             float price = 0;
             if(webBooks.get(i)
                     .findElements(By.xpath(".//span[@class='a-price']"))
